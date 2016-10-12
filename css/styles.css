@@ -1,0 +1,12 @@
+html, body{
+	height: 100%;
+}
+article{
+	height:100%;
+}
+section{
+	height:50%;
+}
+div {
+	border: 1px solid black;
+}
