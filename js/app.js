@@ -15,13 +15,16 @@ function toclick(i){
   var $turn = $("#currentTurn");
   document.getElementById("num"+String(i)).addEventListener("click", (function(){
 	var num = "";
+	console.log($turn.html());
     var num = "num" + String(i);
     var $div = $("#" + num);
     spot = document.getElementById(num).innerHTML;
-    if(spot != "<p>X</p>" && spot != "<p>O</p>"){
-      $div.append("<p>X</p>");
-      $turn.empty();
-      $turn.append("Computer");
+    if($turn.html() == "Player"){
+      if(spot != "<p>X</p>" && spot != "<p>O</p>"){
+        $div.append("<p>X</p>");
+        $turn.empty();
+        $turn.append("Computer");
+      }
     }
   }));
 }
