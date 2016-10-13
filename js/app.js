@@ -6,22 +6,35 @@ function createBoard(){
   var style = "style='width:"+width+";% height:"+height+"%;'"
   var $board = $("#board");
     for(var i = 0; i < 9; i++){
-      var square = "<div id='num"+i+"' style='width:"+width+"px; height:"+height+"px;'></div>";
-      $board.append(square);
+      toclick(i)
     }
     whoGoesFirst();
+}
+
+function toclick(i){
+  document.getElementById("num"+String(i)).addEventListener("click", (function(){
+	var num = "";
+    var num = "num" + String(i);
+    var $div = $("#" + num);
+    spot = document.getElementById(num).innerHTML;
+    if(spot != "<p>X</p>" && spot != "<p>O</p>"){
+      $div.append("<p>X</p>");
+      }
+  }));
 }
 
 function whoGoesFirst(){
 	var num = randomNumber(2);
 	var choice = "";
 	if( num === 0){
-		choice = prompt("You go first. Are you X\'s or O\'s?")
+		//may change to jquery modals.
+		choice = prompt("You go first. Are you X\'s or O\'s?");
     }
     else{
-    	choice = prompt("The computer goes first.Are you X\'s or O\'s?")
+    	choice = prompt("The computer goes first.Are you X\'s or O\'s?");
+    	computerFirst();
     }
-    console.log(choice);
+    
 }
 
 function randomNumber(num = 9){
