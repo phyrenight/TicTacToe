@@ -1,4 +1,60 @@
 console.log("hello")
+var positioning =[{
+  line : "row1",
+  values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+  positions : [{ place : "num0", values: 0},
+                {place : "num1", values: 0},
+                {place : "num2", values: 0}] 
+  },
+  {
+  	line : "row2",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num3", values: 0},
+                 { place : "num4", values: 0},
+                 { place : "num5", values: 0}]
+  },
+  {
+  	line : "row3",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num6", values: 0},
+                 { place : "num7", values: 0},
+                 { place : "num8", values: 0}]
+  },
+  {
+  	line : "vertical1",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num0", values: 0},
+                 { place : "num3", values: 0},
+                 { place : "num6", values: 0}]
+  },
+  {
+  	line : "vertical2",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num1", values: 0},
+                 { place : "num4", values: 0},
+                 { place : "num7", values: 0}]
+  },
+  {
+  	line : "vertical3",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num2", values: 0},
+                 { place : "num5", values: 0},
+                 { place : "num8", values: 0}]
+  },
+  {
+  	line : "diagnol1",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num0", values: 0},
+                 { place : "num4", values: 0},
+                 { place : "num8", values: 0}]
+  },
+  {
+  	line : "diagnol2",
+    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    positions : [{ place : "num2", values: 0},
+                 { place : "num4", values: 0},
+                 { place : "num6", values: 0}]
+  },]
 
 function createBoard(){
   var width = 45;
@@ -10,7 +66,7 @@ function createBoard(){
     }
     whoGoesFirst();
 }
-
+ // change all document.getElementById to jquery $("#")
 function toclick(i){
   var $turn = $("#currentTurn");
   document.getElementById("num"+String(i)).addEventListener("click", (function(){
@@ -22,11 +78,25 @@ function toclick(i){
     if($turn.html() == "Player"){
       if(spot != "<p>X</p>" && spot != "<p>O</p>"){
         $div.append("<p>X</p>");
+        updatePositioning(num, 1);
         $turn.empty();
         $turn.append("Computer");
       }
     }
   }));
+}
+
+function updatePositioning(divId, value){
+  if(divId != undefined && value != undefined){
+    for(var i in positioning){
+      for(var n  = 0; n < 3; ++n){
+        if(positioning[i].positions[n].place == divId){
+          positioning[i].positions[n].value = value;
+          break;
+        }
+  	  }
+  	}
+  }
 }
 
 function whoGoesFirst(){
