@@ -144,13 +144,11 @@ function assignPieces(num){
 function randomNumber(num = 9){
   return Math.floor(Math.random() * num);
 }
-console.log(randomNumber());
 
 function computerFirst(){
   var $turn = $("#currentTurn");
   var num = randomNumber();
   var str = "num"+ String(num);
-  console.log(str);
   var $square = $("#"+str);
   $square.append("<p>O</p>");
   updatePositioning(str, -1);
@@ -159,10 +157,11 @@ function computerFirst(){
 }
 
 function computerMove(){
+  var done = false;
   var $turn = $("#currentTurn")
   var $div = "";
   var computerWin = false;
-  if(true){
+  if($turn.html() == "Computer"){
     for(var i in positioning){
   	  if(positioning[i].values() == -2){
   	    for(var n in positioning[i].positions){
@@ -200,22 +199,32 @@ function computerMove(){
             else{
               $div.append("<p>O</p>");
             }
+            done = true;
             $turn.empty();
             $turn.append("Player");
             break;
           }
   	  	}
   	  }
+  	  if(done){
+  	  	break;
+  	  }
     }
   }
   // need to up data positioning down below somehow
-  if(!computerWin){
+  if(!computerWin && !done){
+    computerRandomMove();
+  }
+}
+
+function computerRandomMove(){
+	  	var found = false;
     var $turn = $("#currentTurn");
     var $div = "";
     var $Xs = $("#X");
     var ranNum = randomNumber();
     var div = $("#num"+ranNum).html();
-    console.log(div);
+    console.log(ranNum);
     if(div != "<p>X</p>" && div != "<p>O</p>"){
       $div = $("#num"+ranNum);
       if($Xs =="Computer"){
@@ -228,7 +237,9 @@ function computerMove(){
     $turn.empty();
     $turn.append("Player");
     }
-  }
+    else{
+      computerRandomMove();
+    }
 }
 
 function displayWin(){
@@ -237,7 +248,7 @@ function displayWin(){
     newGame();
   }
   else if(answer == "no" || answer == "No"){
-
+    confirm("Game over");
   }
   else{
   	displayWin();
@@ -248,10 +259,12 @@ function newGame(){
   var $div;
   var num = "";
   for(var i in positioning){
+  	console.log(i);
   	$div = $("#num"+ i);
   	$div.empty();
     for( var n in positioning[i].position){
       positioning[i].position[n].values = 0;
+      console.log(n);
 	}
   }
   whoGoesFirst();
