@@ -1,56 +1,56 @@
 console.log("hello")
 var positioning =[{
   line : "row1",
-  values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+  values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
   positions : [{ place : "num0", values: 0},
                 {place : "num1", values: 0},
                 {place : "num2", values: 0}] 
   },
   {
   	line : "row2",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num3", values: 0},
                  { place : "num4", values: 0},
                  { place : "num5", values: 0}]
   },
   {
   	line : "row3",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num6", values: 0},
                  { place : "num7", values: 0},
                  { place : "num8", values: 0}]
   },
   {
   	line : "vertical1",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num0", values: 0},
                  { place : "num3", values: 0},
                  { place : "num6", values: 0}]
   },
   {
   	line : "vertical2",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num1", values: 0},
                  { place : "num4", values: 0},
                  { place : "num7", values: 0}]
   },
   {
   	line : "vertical3",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num2", values: 0},
                  { place : "num5", values: 0},
                  { place : "num8", values: 0}]
   },
   {
   	line : "diagnol1",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num0", values: 0},
                  { place : "num4", values: 0},
                  { place : "num8", values: 0}]
   },
   {
   	line : "diagnol2",
-    values : function(){return this.position[0].value + this.position[1].value + this.position[2].value;},
+    values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
     positions : [{ place : "num2", values: 0},
                  { place : "num4", values: 0},
                  { place : "num6", values: 0}]
@@ -71,16 +71,17 @@ function toclick(i){
   var $turn = $("#currentTurn");
   document.getElementById("num"+String(i)).addEventListener("click", (function(){
 	var num = "";
-	console.log($turn.html());
     var num = "num" + String(i);
     var $div = $("#" + num);
     spot = document.getElementById(num).innerHTML;
+    console.log(spot);
     if($turn.html() == "Player"){
       if(spot != "<p>X</p>" && spot != "<p>O</p>"){
         $div.append("<p>X</p>");
         updatePositioning(num, 1);
         $turn.empty();
         $turn.append("Computer");
+        computerMove();
       }
     }
   }));
@@ -91,7 +92,8 @@ function updatePositioning(divId, value){
     for(var i in positioning){
       for(var n  = 0; n < 3; ++n){
         if(positioning[i].positions[n].place == divId){
-          positioning[i].positions[n].value = value;
+          positioning[i].positions[n].values = value;
+          console.log(positioning[i].positions[n].values);
           break;
         }
   	  }
@@ -102,24 +104,30 @@ function updatePositioning(divId, value){
 function whoGoesFirst(){
   var turn = document.getElementById("currentTurn");
   var num = randomNumber(2);
-  var choice = "";
+  var Xs = $("#X").html();
+  if(!Xs){
+    assignPieces(num);
+  }
   if( num === 0){
     //may change to jquery modals.
-    choice = prompt("You go first. Are you X\'s or O\'s?");
     turn.innerHTML = "Player";
-    assignPieces(choice);
   }
   else{
-    choice = prompt("The computer goes first.Are you X\'s or O\'s?");
     turn.innerHTML = "Computer";
-    assignPieces(choice);
     computerFirst();
   }
 }
 
-function assignPieces(choice){
+function assignPieces(num){
   var Xs = document.getElementById("X");
   var Os = document.getElementById("O");
+  var choice ="";
+  if(num === 0 ){
+  	choice = prompt("You go first.Are you X\'s or O\'s?");
+  }
+  else{
+  	choice = prompt("The computer goes first. Are you X\'s or O\'s?");
+  }
   if(choice == "X" || choice == "x"){
     Xs.innerHTML = "Player";
     Os.innerHTML = "Computer";
@@ -141,10 +149,110 @@ console.log(randomNumber());
 function computerFirst(){
   var $turn = $("#currentTurn");
   var num = randomNumber();
-  var str = "#num"+ String(num);
+  var str = "num"+ String(num);
   console.log(str);
-  var $square = $(str);
+  var $square = $("#"+str);
   $square.append("<p>O</p>");
+  updatePositioning(str, -1);
   $turn.empty();
   $turn.append("Player");
+}
+
+function computerMove(){
+  var $turn = $("#currentTurn")
+  var $div = "";
+  var computerWin = false;
+  if(true){
+    for(var i in positioning){
+  	  if(positioning[i].values() == -2){
+  	    for(var n in positioning[i].positions){
+  		  if(positioning[i].positions[n].values === 0){
+  			var pos = positioning[i].positions[n];
+  			$div = $("#"+pos.place);
+  			pos.values = -1;
+  			Xs = $("#X").html();
+  			if(Xs == "Computer"){
+  			  $div.append("<p>X</p>");
+  			}
+  			else{
+  			  $div.append("<p>O</p>");
+  			}
+  			computerWin = true;
+  			break;
+  		  }
+  	    }
+  	    if(computerWin){
+  	    	displayWin();
+  	    	break;
+  	    }
+  	  }
+  	  else if(positioning[i].values() == 2){
+  	  	console.log("Hello");
+  	  	for(var n in positioning[i].positions){
+          if(positioning[i].positions[n].values === 0){
+            var pos = positioning[i].positions[n];
+            $div = $("#"+pos.place);
+            pos.values = -1;
+            Xs = $("#X").html();
+            if(Xs == "Computer"){
+              $div.append("<p>X</p>");
+            }
+            else{
+              $div.append("<p>O</p>");
+            }
+            $turn.empty();
+            $turn.append("Player");
+            break;
+          }
+  	  	}
+  	  }
+    }
+  }
+  // need to up data positioning down below somehow
+  if(!computerWin){
+    var $turn = $("#currentTurn");
+    var $div = "";
+    var $Xs = $("#X");
+    var ranNum = randomNumber();
+    var div = $("#num"+ranNum).html();
+    console.log(div);
+    if(div != "<p>X</p>" && div != "<p>O</p>"){
+      $div = $("#num"+ranNum);
+      if($Xs =="Computer"){
+        $div.append("<p>X</p>");
+      }
+      else{
+        $div.append("<p>O</p>");
+      }
+    updatePositioning(("num"+ranNum), -1);
+    $turn.empty();
+    $turn.append("Player");
+    }
+  }
+}
+
+function displayWin(){
+  var answer = prompt("You Lose. Would you like to play again?(yes or no");
+  if(answer == "yes" || answer == "Yes"){
+    newGame();
+  }
+  else if(answer == "no" || answer == "No"){
+
+  }
+  else{
+  	displayWin();
+  }
+}
+
+function newGame(){
+  var $div;
+  var num = "";
+  for(var i in positioning){
+  	$div = $("#num"+ i);
+  	$div.empty();
+    for( var n in positioning[i].position){
+      positioning[i].position[n].values = 0;
+	}
+  }
+  whoGoesFirst();
 }
