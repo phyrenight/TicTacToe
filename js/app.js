@@ -69,6 +69,7 @@ function createBoard(){
  // change all document.getElementById to jquery $("#")
 function toclick(i){
   var $turn = $("#currentTurn");
+  var Xs = $("#X").html();
   document.getElementById("num"+String(i)).addEventListener("click", (function(){
 	var num = "";
     var num = "num" + String(i);
@@ -77,7 +78,12 @@ function toclick(i){
     console.log(spot);
     if($turn.html() == "Player"){
       if(spot != "<p>X</p>" && spot != "<p>O</p>"){
-        $div.append("<p>X</p>");
+      	if(Xs == "Player"){
+          $div.append("<p>X</p>");
+        }
+        else{
+          $div.append("<p>O</p>");
+        }
         updatePositioning(num, 1);
         $turn.empty();
         $turn.append("Computer");
@@ -146,11 +152,17 @@ function randomNumber(num = 9){
 }
 
 function computerFirst(){
+  var Xs = $("#X").html();
   var $turn = $("#currentTurn");
   var num = randomNumber();
   var str = "num"+ String(num);
   var $square = $("#"+str);
-  $square.append("<p>O</p>");
+  if(Xs == "Player"){
+    $square.append("<p>O</p>");
+  }
+  else{
+  	$square.append("<p>X</p>");
+  }
   updatePositioning(str, -1);
   $turn.empty();
   $turn.append("Player");
@@ -160,6 +172,7 @@ function computerMove(){
   var done = false;
   var $turn = $("#currentTurn")
   var $div = "";
+  var Xs = "";
   var computerWin = false;
   if($turn.html() == "Computer"){
     for(var i in positioning){
@@ -218,16 +231,16 @@ function computerMove(){
 }
 
 function computerRandomMove(){
-	  	var found = false;
+	var found = false;
     var $turn = $("#currentTurn");
     var $div = "";
     var $Xs = $("#X");
     var ranNum = randomNumber();
     var div = $("#num"+ranNum).html();
-    console.log(ranNum);
+    console.log($Xs);
     if(div != "<p>X</p>" && div != "<p>O</p>"){
       $div = $("#num"+ranNum);
-      if($Xs =="Computer"){
+      if($Xs.html() =="Computer"){
         $div.append("<p>X</p>");
       }
       else{
