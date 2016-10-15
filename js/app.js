@@ -258,10 +258,12 @@ function displayWin(){
 function newGame(){
   var $div;
   var num = "";
-  for(var i in positioning){
+  for(var i = 0; i < 9; ++i){
   	console.log(i);
   	$div = $("#num"+ i);
   	$div.empty();
+  }
+  for(var i in positioning){
     for( var n in positioning[i].position){
       positioning[i].position[n].values = 0;
       console.log(n);
