@@ -75,12 +75,12 @@ function toclick(i){
     var $div = $("#" + num);
     spot = $("#"+num).html();
     if($turn.html() == "Player"){
-      if(spot != "<p>X</p>" && spot != "<p>O</p>"){
+      if(spot != "X" && spot != "O"){  //<p>
       	if(Xs == "Player"){
-          $div.append("<p>X</p>");
+          $div.append("X");   //<p>
         }
         else{
-          $div.append("<p>O</p>");
+          $div.append("O");  // <p>
         }
         updatePositioning(num, 1);
         $turn.empty();
@@ -156,10 +156,10 @@ function computerFirst(){
   var str = "num"+ String(num);
   var $square = $("#"+str);
   if(Xs == "Player"){
-    $square.append("<p>O</p>");
+    $square.append("O"); //<p>O</p>
   }
   else{
-  	$square.append("<p>X</p>");
+  	$square.append("X");  //<p>X</p>
   }
   updatePositioning(str, -1);
   //$turn.empty();
@@ -182,10 +182,10 @@ function computerMove(){
   			pos.values = -1;
   			Xs = $("#X").html();
   			if(Xs == "Computer"){
-  			  $div.append("<p>X</p>");
+  			  $div.append("X");  //<p>
   			}
   			else{
-  			  $div.append("<p>O</p>");
+  			  $div.append("O");  // <p>
   			}
   			computerWin = true;
   			break;
@@ -204,10 +204,10 @@ function computerMove(){
             pos.values = -1;
             Xs = $("#X").html();
             if(Xs == "Computer"){
-              $div.append("<p>X</p>");
+              $div.append("X"); //<p>
             }
             else{
-              $div.append("<p>O</p>");
+              $div.append("O");  //<p>
             }
             done = true;
             $turn.empty();
@@ -234,13 +234,13 @@ function computerRandomMove(){
     var $Xs = $("#X");
     var ranNum = randomNumber();
     var div = $("#num"+ranNum).html();
-    if(div != "<p>X</p>" && div != "<p>O</p>"){
+    if(div != "X" && div != "O"){  // <p>
       $div = $("#num"+ranNum);
       if($Xs.html() =="Computer"){
-        $div.append("<p>X</p>");
+        $div.append("X");  //<p>
       }
       else{
-        $div.append("<p>O</p>");
+        $div.append("O");  //<p>
       }
     updatePositioning(("num"+ranNum), -1);
     $turn.empty();

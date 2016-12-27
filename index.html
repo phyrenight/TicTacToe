@@ -3,6 +3,7 @@
   <head>
     <title>Tic Tac Toe</title>
     <meta charset='utf-8'>
+    <link rel="stylesheet" href="css/normalize.css">
     <script src="js/JQuery.js"></script>
     <script src="js/app.js"></script>
     <link rel="stylesheet" href="css/styles.css">
@@ -17,15 +18,21 @@
     <section><p>X's: <span id="X"></span></p><p>O's: <span id="O"></span></p>
     <button onclick="newGame()">New game</button></section>
       <section id="board">
-      <div id="num0" class="game"></div>
-      <div id="num1" class="game"></div>
-      <div id="num2" class="game"></div>
-      <div id="num3" class="game"></div>
-      <div id="num4" class="game"></div>
-      <div id="num5" class="game"></div>
-      <div id="num6" class="game"></div>
-      <div id="num7" class="game"></div>
-      <div id="num8" class="game"></div>
+        <div class="row">
+          <div id="num0" class="game"></div>
+          <div id="num1" class="game"></div>
+          <div id="num2" class="game"></div>
+        </div>
+        <div class="row">
+          <div id="num3" class="game"></div>
+          <div id="num4" class="game"></div>
+          <div id="num5" class="game"></div>
+        </div>
+        <div class="row">
+          <div id="num6" class="game"></div>
+          <div id="num7" class="game"></div>
+          <div id="num8" class="game"></div>
+        </div>
       </section>
     </article>
   </body>

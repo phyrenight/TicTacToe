@@ -1,19 +1,76 @@
-html, body{
-	height: 100%;
-}
-article{
-	height:100%;
-}
-section{
-	height:50%;
-}
-div {
-	border: 1px solid black;
-}
-.game{
-	height:50px;
-	width:50px;
-	text-align:center;
-}
-#num0, #num1, #num2, #num3, #num4, #num5, #num6, #num7, #num8{
-}
+html, body {
+  height: 100%; }
+
+article {
+  height: 100%; }
+
+section {
+  height: 40%; }
+
+.game {
+  height: 50px;
+  width: 50px;
+  text-align: center; }
+
+#board {
+  margin-left: 20%;
+  width: 60%; }
+
+.row {
+  width: 100%; }
+
+#num0 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num1 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num2 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num3 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num4 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num5 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num6 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num7 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+#num8 {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  border: 1px solid black; }
+
+/*# sourceMappingURL=styles.css.map */
