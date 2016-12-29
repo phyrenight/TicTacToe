@@ -68,7 +68,7 @@ function createBoard(){
  // change all document.getElementById to jquery $("#")
 function toclick(i){
   var $turn = $("#currentTurn");
-  document.getElementById("num"+String(i)).addEventListener("click", (function(){
+  $("#num"+String(i)).click((function(){
   var num = "";
 	var Xs = $("#X").html();
     num = "num" + String(i);
@@ -105,7 +105,7 @@ function updatePositioning(divId, value){
 }
 
 function whoGoesFirst(){
-  var turn = $("#currentTurn"); // just changed
+  var turn = $("#currentTurn");
   var num = randomNumber(2);
   var Xs = $("#X").html();
   if(!Xs){
