@@ -69,7 +69,7 @@ function createBoard(){
 function toclick(i){
   var $turn = $("#currentTurn");
   document.getElementById("num"+String(i)).addEventListener("click", (function(){
-	var num = "";
+  var num = "";
 	var Xs = $("#X").html();
     num = "num" + String(i);
     var $div = $("#" + num);
@@ -167,6 +167,7 @@ function computerFirst(){
 }
 
 function computerMove(){
+  isMatchOver()
   var done = false;
   var $turn = $("#currentTurn");
   var $div = "";
@@ -265,6 +266,9 @@ function displayWin(){
 }
 
 function newGame(){
+  /*
+    resets the board
+  */
   var $div;
   for(var i = 0; i < 9; ++i){
   	$div = $("#num"+ i);
@@ -276,4 +280,20 @@ function newGame(){
 	  }
   }
   whoGoesFirst();
+}
+
+function isMatchOver(){
+  /*
+    checks to see if the board is fuilled
+  */
+  var draw = false;
+  for(var i = 0; i < 9; i++){
+    var $div = $("#num"+i);
+    console.log($div.html())
+    if($div.html() != "O" || $div.html() != "X"){
+      draw = true;
+      break;
+    }
+  }
+  return draw;
 }
