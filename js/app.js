@@ -170,64 +170,80 @@ function computerFirst(){
 }
 
 function computerMove(){
-  isMatchOver()
   var done = false;
   var $turn = $("#currentTurn");
   var $div = "";
   var Xs = "";
+  var pos;
   var computerWin = false;
-  if($turn.html() == "Computer"){
-    for(var i in positioning){
-  	  if(positioning[i].values() == -2){
-  	    for(var n in positioning[i].positions){
-  		  if(positioning[i].positions[n].values === 0){
-  			var pos = positioning[i].positions[n];
-  			$div = $("#"+pos.place);
-  			pos.values = -1;
-  			Xs = $("#X").html();
-  			if(Xs == "Computer"){
-  			  $div.append("X");  //<p>
-  			}
-  			else{
-  			  $div.append("O");  // <p>
-  			}
-  			computerWin = true;
-  			break;
-  		  }
+  if(!isMatchOver()){
+    if($turn.html() == "Computer"){
+      for(var i in positioning){
+  	    if(positioning[i].values() == -2){
+  	      // for(var n in positioning[i].positions){
+  		      // if(positioning[i].positions[n].values === 0){
+  			      pos = findOpenPosition(i);
+  			      $div = $("#"+pos.place);
+  			      //pos.values = -1;
+  			      Xs = $("#X").html();
+  			      if(Xs == "Computer"){
+  			        $div.html("X");  //<p>
+  			      }
+  			      else{
+  			        $div.html("O");  // <p>
+  			      }
+  			      computerWin = true;
+  			      break;
+  		     // }
+  	      //}
+  	      if(computerWin){
+  	    	  displayWin();
+  	    	  break;
+  	      }
   	    }
-  	    if(computerWin){
-  	    	displayWin();
-  	    	break;
+  	    else if(positioning[i].values() == 2){
+  	  	//  for(var n in positioning[i].positions){
+          //  if(positioning[i].positions[n].values === 0){
+            //  pos = positioning[i].positions[n];
+              pos = findOpenPosition(i);
+              $div = $("#"+pos.place);
+             // pos.values = -1;
+              Xs = $("#X").html();
+              if(Xs == "Computer"){
+                $div.html("X"); //<p>
+              }
+              else{
+                $div.html("O");  //<p>
+              }
+              done = true;
+              $turn.html("Player");
+              break;
+          //  }
+  	  	 // }
   	    }
-  	  }
-  	  else if(positioning[i].values() == 2){
-  	  	for(var n in positioning[i].positions){
-          if(positioning[i].positions[n].values === 0){
-            var pos = positioning[i].positions[n];
-            $div = $("#"+pos.place);
-            pos.values = -1;
-            Xs = $("#X").html();
-            if(Xs == "Computer"){
-              $div.append("X"); //<p>
-            }
-            else{
-              $div.append("O");  //<p>
-            }
-            done = true;
-            $turn.empty();
-            $turn.append("Player");
-            break;
-          }
-  	  	}
-  	  }
-  	  if(done){
-  	  	break;
-  	  }
+  	    if(done){
+  	  	  break;
+  	    }
+      }
+    }
+  // need to up data positioning down below somehow
+    if(!computerWin && !done){
+      console.log("hello")
+      computerRandomMove();
     }
   }
-  // need to up data positioning down below somehow
-  if(!computerWin && !done){
-    computerRandomMove();
+  else{
+    console.log("match is over")
+  }
+}
+
+function findOpenPosition(line){
+  for(var n in positioning[line].positions){  // to boost performance change to the other for loop
+    if(positioning[line].positions[n].values === 0){
+      var pos = positioning[line].positions[n];
+      updatePositioning(pos.place, -1);
+      return pos
+    }
   }
 }
 
@@ -241,14 +257,13 @@ function computerRandomMove(){
     if(div != "X" && div != "O"){  // <p>
       $div = $("#num"+ranNum);
       if($Xs.html() =="Computer"){
-        $div.append("X");  //<p>
+        $div.html("X");  //<p>
       }
       else{
-        $div.append("O");  //<p>
+        $div.html("O");  //<p>
       }
     updatePositioning(("num"+ranNum), -1);
-    $turn.empty();
-    $turn.append("Player");
+    $turn.html("Player");
     }
     else{
       computerRandomMove();
@@ -289,12 +304,12 @@ function isMatchOver(){
   /*
     checks to see if the board is fuilled
   */
-  var draw = false;
+  var draw = true;
   for(var i = 0; i < 9; i++){
     var $div = $("#num"+i);
     console.log($div.html())
     if($div.html() != "O" || $div.html() != "X"){
-      draw = true;
+      draw = false;
       break;
     }
   }
