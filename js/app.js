@@ -65,7 +65,7 @@ function createBoard(){
     }
     whoGoesFirst();
 }
- // change all document.getElementById to jquery $("#")
+
 function toclick(i){
   var $turn = $("#currentTurn");
   $("#num"+String(i)).click((function(){
@@ -122,6 +122,9 @@ function whoGoesFirst(){
 }
 
 function assignPieces(num){
+  /*
+    assigns X's or O's to the computer and the player
+  */
   var Xs = $("#X");
   var Os = $("#O");
   var choice ="";
@@ -275,8 +278,8 @@ function newGame(){
   	$div.empty();
   }
   for(var i in positioning){
-    for( var n in positioning[i].position){
-      positioning[i].position[n].values = 0;
+    for( var n in positioning[i].positions){
+      positioning[i].positions[n].values = 0;
 	  }
   }
   whoGoesFirst();
