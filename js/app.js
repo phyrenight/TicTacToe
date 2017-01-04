@@ -74,19 +74,23 @@ function toclick(i){
     num = "num" + String(i);
     var $div = $("#" + num);
     spot = $("#"+num).html();
-    if($turn.html() == "Player"){
-      if(spot != "X" && spot != "O"){  //<p>
-      	if(Xs == "Player"){
-          $div.append("X");   //<p>
+    if(!isMatchOver()){
+      if($turn.html() == "Player"){
+        if(spot != "X" && spot != "O"){
+      	  if(Xs == "Player"){
+            $div.html("X");
+          }
+          else{
+            $div.html("O");
+          }
+          updatePositioning(num, 1);
+          $turn.html("Computer");
+          computerMove();
         }
-        else{
-          $div.append("O");  // <p>
-        }
-        updatePositioning(num, 1);
-        $turn.empty();
-        $turn.append("Computer");
-        computerMove();
       }
+    }
+    else{
+      displayWin();
     }
   }));
 }
@@ -159,81 +163,56 @@ function computerFirst(){
   var str = "num"+ String(num);
   var $square = $("#"+str);
   if(Xs == "Player"){
-    $square.append("O"); //<p>O</p>
+    $square.html("O"); //<p>O</p>
   }
   else{
-  	$square.append("X");  //<p>X</p>
+  	$square.html("X");  //<p>X</p>
   }
   updatePositioning(str, -1);
-  //$turn.empty();
   $turn.html("Player");
 }
 
 function computerMove(){
   var done = false;
   var $turn = $("#currentTurn");
-  var $div = "";
-  var Xs = "";
   var pos;
   var computerWin = false;
   if(!isMatchOver()){
+    console.log(isMatchOver())
     if($turn.html() == "Computer"){
       for(var i in positioning){
   	    if(positioning[i].values() == -2){
-  	      // for(var n in positioning[i].positions){
-  		      // if(positioning[i].positions[n].values === 0){
-  			      pos = findOpenPosition(i);
-  			      $div = $("#"+pos.place);
-  			      //pos.values = -1;
-  			      Xs = $("#X").html();
-  			      if(Xs == "Computer"){
-  			        $div.html("X");  //<p>
-  			      }
-  			      else{
-  			        $div.html("O");  // <p>
-  			      }
-  			      computerWin = true;
-  			      break;
-  		     // }
-  	      //}
-  	      if(computerWin){
-  	    	  displayWin();
-  	    	  break;
-  	      }
-  	    }
+  			  pos = findOpenPosition(i);
+  			  placeComputerMark(pos.place);
+  			  computerWin = true;
+  			  break;
+        }
   	    else if(positioning[i].values() == 2){
-  	  	//  for(var n in positioning[i].positions){
-          //  if(positioning[i].positions[n].values === 0){
-            //  pos = positioning[i].positions[n];
-              pos = findOpenPosition(i);
-              $div = $("#"+pos.place);
-             // pos.values = -1;
-              Xs = $("#X").html();
-              if(Xs == "Computer"){
-                $div.html("X"); //<p>
-              }
-              else{
-                $div.html("O");  //<p>
-              }
-              done = true;
-              $turn.html("Player");
-              break;
-          //  }
-  	  	 // }
-  	    }
-  	    if(done){
-  	  	  break;
+          pos = findOpenPosition(i);
+          placeComputerMark(pos.place);
+          done = true;
+          $turn.html("Player");
+          break;
   	    }
       }
     }
   // need to up data positioning down below somehow
     if(!computerWin && !done){
-      console.log("hello")
       computerRandomMove();
     }
   }
   else{
-    console.log("match is over")
+    displayWin()
+  }
+}
+
+function placeComputerMark(square){
+  var Xs = $("#X").html();
+  if(Xs == "Computer"){
+    $("#"+square).html("X");
+  }
+  else{
+    $("#"+square).html("O");
   }
 }
 
@@ -242,32 +221,24 @@ function findOpenPosition(line){
     if(positioning[line].positions[n].values === 0){
       var pos = positioning[line].positions[n];
       updatePositioning(pos.place, -1);
-      return pos
+      return pos;
     }
   }
 }
 
 function computerRandomMove(){
 	var found = false;
-    var $turn = $("#currentTurn");
-    var $div = "";
-    var $Xs = $("#X");
-    var ranNum = randomNumber();
-    var div = $("#num"+ranNum).html();
-    if(div != "X" && div != "O"){  // <p>
-      $div = $("#num"+ranNum);
-      if($Xs.html() =="Computer"){
-        $div.html("X");  //<p>
-      }
-      else{
-        $div.html("O");  //<p>
-      }
+  var $turn = $("#currentTurn");
+  var ranNum = randomNumber();
+  var div = $("#num"+ranNum).html();
+  if(div != "X" && div != "O"){
+    placeComputerMark("num"+ranNum);
     updatePositioning(("num"+ranNum), -1);
     $turn.html("Player");
-    }
-    else{
-      computerRandomMove();
-    }
+  }
+  else{
+    computerRandomMove();
+  }
 }
 
 function displayWin(){
@@ -292,14 +263,15 @@ function newGame(){
   	$div = $("#num"+ i);
   	$div.empty();
   }
-  for(var i in positioning){
-    for( var n in positioning[i].positions){
-      positioning[i].positions[n].values = 0;
+  for(var t in positioning){
+    for( var n in positioning[t].positions){
+      positioning[t].positions[n].values = 0;
 	  }
   }
   whoGoesFirst();
 }
 
+// to increase performance use positioning.ppositions to find an empty space instead of accessing the dom.
 function isMatchOver(){
   /*
     checks to see if the board is fuilled
@@ -307,8 +279,7 @@ function isMatchOver(){
   var draw = true;
   for(var i = 0; i < 9; i++){
     var $div = $("#num"+i);
-    console.log($div.html())
-    if($div.html() != "O" || $div.html() != "X"){
+    if($div.html() != "O" && $div.html() != "X"){
       draw = false;
       break;
     }
