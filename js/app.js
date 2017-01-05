@@ -178,7 +178,6 @@ function computerMove(){
   var pos;
   var computerWin = false;
   if(!isMatchOver()){
-    console.log(isMatchOver())
     if($turn.html() == "Computer"){
       for(var i in positioning){
   	    if(positioning[i].values() == -2){
@@ -241,8 +240,36 @@ function computerRandomMove(){
   }
 }
 
+function whoWon(){
+  /*
+
+  */
+  var winner = "Draw";
+  for(var i in positioning){
+    if(positioning[i].values == 3){
+      winner = "Player";
+      break;
+    }
+    else if(positioning[i].values == 3){
+      winner = "Computer";
+      break;
+    }
+  }
+  return winner;
+}
+
 function displayWin(){
-  var answer = prompt("You Lose. Would you like to play again?(yes or no)");
+  var winner = whoWon();
+  var answer = "";
+  if( winner == "Player"){
+    answer = prompt("You win. Would you like to play again?(yes or no)");
+  }
+  else if(winner == "Computer"){
+    answer = prompt("You Lose. Would you like to play again?(yes or no)");
+  }
+  else{
+    answer = prompt("Draw. Would you like to play again?(yes or no)");
+  }
   if(answer == "yes" || answer == "Yes"){
     newGame();
   }
