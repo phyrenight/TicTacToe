@@ -56,9 +56,9 @@ var positioning =[{
   },];
 
 function createBoard(){
-  var width = 45;
-  var height = 45;
-  var style = "style='width:"+width+";% height:"+height+"%;'";
+ // var width = 45;
+ // var height = 45;
+ // var style = "style='width:"+width+";% height:"+height+"%;'";
   var $board = $("#board");
     for(var i = 0; i < 9; i++){
       toclick(i);
@@ -74,7 +74,7 @@ function toclick(i){
     num = "num" + String(i);
     var $div = $("#" + num);
     spot = $("#"+num).html();
-    if(!isMatchOver()){
+    //if(!isMatchOver()){
       if($turn.html() == "Player"){
         if(spot != "X" && spot != "O"){
       	  if(Xs == "Player"){
@@ -85,13 +85,18 @@ function toclick(i){
           }
           updatePositioning(num, 1);
           $turn.html("Computer");
+          if(isMatchOver()){
+            displayWin();
+          }
+          else{
           computerMove();
         }
+        }
       }
-    }
-    else{
-      displayWin();
-    }
+    //}
+    //else{
+   //   displayWin();
+   // }
   }));
 }
 
@@ -190,8 +195,13 @@ function computerMove(){
           pos = findOpenPosition(i);
           placeComputerMark(pos.place);
           done = true;
-          $turn.html("Player");
-          break;
+          if(isMatchOver()){
+            displayWin();
+          }
+          else{
+            $turn.html("Player");
+            break;
+          }
   	    }
       }
     }
@@ -233,7 +243,12 @@ function computerRandomMove(){
   if(div != "X" && div != "O"){
     placeComputerMark("num"+ranNum);
     updatePositioning(("num"+ranNum), -1);
-    $turn.html("Player");
+    if(isMatchOver()){
+      displayWin();
+    }
+    else{
+      $turn.html("Player");
+    }
   }
   else{
     computerRandomMove();
