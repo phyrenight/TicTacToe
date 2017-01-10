@@ -189,6 +189,7 @@ function computerMove(){
   			  pos = findOpenPosition(i);
   			  placeComputerMark(pos.place);
   			  computerWin = true;
+          displayWin();
   			  break;
         }
   	    else if(positioning[i].values() == 2){
@@ -261,11 +262,11 @@ function whoWon(){
   */
   var winner = "Draw";
   for(var i in positioning){
-    if(positioning[i].values == 3){
+    if(positioning[i].values() == 3){
       winner = "Player";
       break;
     }
-    else if(positioning[i].values == 3){
+    else if(positioning[i].values() == -3){
       winner = "Computer";
       break;
     }
