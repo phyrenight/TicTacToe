@@ -78,10 +78,10 @@ function toclick(i){
       if($turn.html() == "Player"){
         if(spot != "X" && spot != "O"){
       	  if(Xs == "Player"){
-            $div.html("X");
+            $div.html("<p>X</p>");
           }
           else{
-            $div.html("O");
+            $div.html("<p>O</p>");
           }
           updatePositioning(num, 1);
           $turn.html("Computer");
@@ -168,10 +168,10 @@ function computerFirst(){
   var str = "num"+ String(num);
   var $square = $("#"+str);
   if(Xs == "Player"){
-    $square.html("O"); //<p>O</p>
+    $square.html("<p>O</p>"); //<p>O</p>
   }
   else{
-  	$square.html("X");  //<p>X</p>
+  	$square.html("<p>X</p>");  //<p>X</p>
   }
   updatePositioning(str, -1);
   $turn.html("Player");
@@ -219,10 +219,10 @@ function computerMove(){
 function placeComputerMark(square){
   var Xs = $("#X").html();
   if(Xs == "Computer"){
-    $("#"+square).html("X");
+    $("#"+square).html("<p>X</p>");
   }
   else{
-    $("#"+square).html("O");
+    $("#"+square).html("<p>O</p>");
   }
 }
 

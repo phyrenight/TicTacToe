@@ -1,112 +1,40 @@
-html, body {
-  height: 100%; }
-
-header {
+html, body, main {
+  height: 100%;
   text-align: center; }
 
-section {
-  height: 10%;
-  text-align: center; }
-
-.game {
-  height: 50px;
-  width: 50px;
-  text-align: center; }
-
-#board {
-  margin-top: 5%;
-  height: 40%;
-  margin-left: 20%;
-  width: 60%;
-  background: #000; }
-
-.row {
-  width: 100%; }
-
-#num0 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num1 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num2 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num3 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num4 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num5 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num6 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num7 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-#num8 {
-  display: inline-block;
-  width: 30%;
-  vertical-align: top;
-  background: #FFF;
-  margin-top: 3%;
-  margin-left: 2%; }
-
-.XsOs {
-  display: inline; }
-
-.X {
-  margin-right: 1%; }
-
-button {
-  display: block;
-  margin: auto;
-  margin-top: 1%; }
+#gameInfo {
+  margin-bottom: 5%;
+  font-size: 2em; }
 
 h1 {
-  letter-spacing: 1em; }
+  font-size: 3em; }
+
+header p {
+  font-size: 2em; }
+
+#board {
+  height: 80%;
+  width: 100%; }
+
+.row {
+  height: 320px;
+  background-color: #000; }
+
+.game {
+  margin-top: 2%;
+  display: inline-block;
+  height: 280px;
+  width: 280px;
+  background-color: #FFF;
+  border: 1px solid black;
+  vertical-align: middle; }
+
+.game p {
+  font-size: 9em;
+  margin: 0%;
+  padding: 0%; }
+
+.game + .game {
+  margin-left: 2%; }
 
 /*# sourceMappingURL=styles.css.map */
