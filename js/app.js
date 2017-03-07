@@ -56,9 +56,6 @@ var positioning =[{
   },];
 
 function createBoard(){
- // var width = 45;
- // var height = 45;
- // var style = "style='width:"+width+";% height:"+height+"%;'";
   var $board = $("#board");
     for(var i = 0; i < 9; i++){
       toclick(i);
@@ -74,9 +71,9 @@ function toclick(i){
     num = "num" + String(i);
     var $div = $("#" + num);
     spot = $("#"+num).html();
-    //if(!isMatchOver()){
+    if(!isMatchOver()){
       if($turn.html() == "Player"){
-        if(spot != "X" && spot != "O"){
+        if(spot != "<p>X</p>" && spot != "<p>O</p>"){
       	  if(Xs == "Player"){
             $div.html("<p>X</p>");
           }
@@ -93,7 +90,7 @@ function toclick(i){
         }
         }
       }
-    //}
+    }
     //else{
    //   displayWin();
    // }
@@ -168,10 +165,10 @@ function computerFirst(){
   var str = "num"+ String(num);
   var $square = $("#"+str);
   if(Xs == "Player"){
-    $square.html("<p>O</p>"); //<p>O</p>
+    $square.html("<p>O</p>");
   }
   else{
-  	$square.html("<p>X</p>");  //<p>X</p>
+  	$square.html("<p>X</p>");
   }
   updatePositioning(str, -1);
   $turn.html("Player");
@@ -241,7 +238,7 @@ function computerRandomMove(){
   var $turn = $("#currentTurn");
   var ranNum = randomNumber();
   var div = $("#num"+ranNum).html();
-  if(div != "X" && div != "O"){
+  if(div != "<p>X</p>" && div != "<p>O</p>"){
     placeComputerMark("num"+ranNum);
     updatePositioning(("num"+ranNum), -1);
     if(isMatchOver()){
@@ -317,12 +314,12 @@ function newGame(){
 // to increase performance use positioning.ppositions to find an empty space instead of accessing the dom.
 function isMatchOver(){
   /*
-    checks to see if the board is fuilled
+    checks to see if the board is fulled
   */
   var draw = true;
   for(var i = 0; i < 9; i++){
     var $div = $("#num"+i);
-    if($div.html() != "O" && $div.html() != "X"){
+    if($div.html() != "<p>O</p>" && $div.html() != "<p>X</p>"){
       draw = false;
       break;
     }
