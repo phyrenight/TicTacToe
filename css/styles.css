@@ -1,40 +1,66 @@
 html, body, main {
-  height: 100%;
+  height: 90%;
   text-align: center; }
 
 #gameInfo {
   margin-bottom: 5%;
-  font-size: 2em; }
+  font-size: 1em; }
 
 h1 {
   font-size: 3em; }
 
 header p {
-  font-size: 2em; }
+  font-size: 1em; }
 
 #board {
-  height: 80%;
+  margin: auto;
+  height: 35%;
   width: 100%; }
 
 .row {
-  height: 320px;
+  height: 100px;
   background-color: #000; }
 
 .game {
   margin-top: 2%;
   display: inline-block;
-  height: 280px;
-  width: 280px;
+  height: 80px;
+  width: 80px;
   background-color: #FFF;
   border: 1px solid black;
   vertical-align: middle; }
 
 .game p {
-  font-size: 9em;
+  font-size: 5em;
   margin: 0%;
   padding: 0%; }
 
 .game + .game {
   margin-left: 2%; }
+
+@media (min-width: 500px) {
+  #board {
+    width: 60%;
+    height: 63%; } }
+@media (min-width: 760px) {
+  main {
+    height: 60%; }
+
+  #gameInfo {
+    margin-bottom: 2%; }
+
+  #board {
+    width: 35%;
+    height: 63%; }
+
+  .row {
+    height: 100px; }
+
+  .game {
+    height: 80px;
+    width: 80px; }
+
+  .game p {
+    font-size: 5em; } }
 
 /*# sourceMappingURL=styles.css.map */
