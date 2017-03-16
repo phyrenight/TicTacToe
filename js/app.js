@@ -1,3 +1,8 @@
+(function(){
+
+  var newGameButton  = document.getElementById("newGameButton");
+  newGameButton.addEventListener("click", newGame, false);
+
 var positioning =[{
   line : "row1",
   values : function(){return this.positions[0].values + this.positions[1].values + this.positions[2].values;},
@@ -137,20 +142,21 @@ function assignPieces(num){
   if(num === 0 ){
   	choice = prompt("You go first.Are you X\'s or O\'s?");
   }
-  else{
+  else if(num != 0){
   	choice = prompt("The computer goes first. Are you X\'s or O\'s?");
   }
-  if(choice == "X" || choice == "x"){
-    Xs.html("Player");
-    Os.html("Computer");
-  }
-  else if(choice == "O" || choice == "o"){
-    Xs.html("Computer");
-    Os.html("Player");
- 
-  }
   else{
-    whoGoesFirst();
+    choice = null;
+  }
+  if(choice){
+    if(choice == "X" || choice == "x"){
+      Xs.html("Player");
+      Os.html("Computer");
+    }
+    else if(choice == "O" || choice == "o"){
+      Xs.html("Computer");
+      Os.html("Player");
+    }
   }
 }
 
@@ -326,3 +332,6 @@ function isMatchOver(){
   }
   return draw;
 }
+
+createBoard();
+})();

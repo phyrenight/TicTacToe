@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body onload="createBoard()">
+  <body>
     <header>
       <h1>Tic Tac Toe</h1>
       <p>Turn: <span id="currentTurn"></span></p>
@@ -17,7 +17,7 @@
     <div id="gameInfo">
       <p class="XsOs">X's: <span id="X"></span></p>
       <p class="XsOs">O's: <span id="O"></span></p>
-      <button onclick="newGame()">New game</button>
+      <button id="newGameButton">New game</button>
     </div>
       <div id="board">
         <div class="row">
