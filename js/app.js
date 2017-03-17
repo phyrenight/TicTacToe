@@ -142,7 +142,7 @@ function assignPieces(num){
   if(num === 0 ){
   	choice = prompt("You go first.Are you X\'s or O\'s?");
   }
-  else if(num != 0){
+  else if(num !== 0){
   	choice = prompt("The computer goes first. Are you X\'s or O\'s?");
   }
   else{
@@ -167,7 +167,7 @@ function randomNumber(num = 9){
 function computerFirst(){
   var Xs = $("#X").html();
   var $turn = $("#currentTurn");
-  var num = randomNumber();
+  var num = randomNumber(9);
   var str = "num"+ String(num);
   var $square = $("#"+str);
   if(Xs == "Player"){
@@ -215,7 +215,7 @@ function computerMove(){
     }
   }
   else{
-    displayWin()
+    displayWin();
   }
 }
 
@@ -242,7 +242,7 @@ function findOpenPosition(line){
 function computerRandomMove(){
 	var found = false;
   var $turn = $("#currentTurn");
-  var ranNum = randomNumber();
+  var ranNum = randomNumber(9);
   var div = $("#num"+ranNum).html();
   if(div != "<p>X</p>" && div != "<p>O</p>"){
     placeComputerMark("num"+ranNum);
